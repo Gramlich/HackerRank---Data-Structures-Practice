@@ -1,0 +1,57 @@
+'''
+Context
+Given a 2D Array:
+
+1 1 1 0 0 0
+0 1 0 0 0 0
+1 1 1 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+
+We define an hourglass in to be a subset of values with indices falling in this pattern in 's graphical representation:
+
+a b c
+  d
+e f g
+
+There are hourglasses in 16, and an hourglass sum is the sum of an hourglass' values. 
+Rerturn the sum of the greatest hourglass.
+'''
+
+
+#!/bin/python3
+
+import sys
+
+
+arr = []
+for arr_i in range(6):
+   arr_t = [int(arr_temp) for arr_temp in input().strip().split(' ')]
+   arr.append(arr_t)
+
+    
+def hourGlassSum(arr):
+    Mtop = None
+    Mmid = None
+    Mbase = None
+    maxHG = float('-inf')
+
+    for loc, cell in enumerate(arr):
+        if loc > 3:
+            break
+        else:
+            for index, i in enumerate(cell):
+                if index > 3:
+                    break
+                else:
+                    top = sum(arr[loc][index:index+3])
+                    mid = arr[loc + 1][index + 1]
+                    base = sum(arr[loc + 2][index:index + 3])
+                    hg = top + mid + base
+                    if hg > maxHG:
+                        maxHG = hg
+
+    return maxHG
+
+print(hourGlassSum(arr))
