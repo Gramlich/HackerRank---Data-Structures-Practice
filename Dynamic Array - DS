@@ -1,0 +1,28 @@
+'''
+
+    Create a list, , of empty sequences, where each sequence is indexed from to . The elements within each of the sequences also use -indexing.
+    Create an integer, , and initialize it to .
+    The types of queries that can be performed on your list of sequences () are described below:
+        Query: 1 x y
+            Find the sequence, , at index in .
+            Append integer to sequence .
+        Query: 2 x y
+            Find the sequence, , at index in .
+            Find the value of element in (where is the size of ) and assign it to .
+            Print the new value of on a new line
+'''
+
+n, q = map(int, input().split())
+seqList = [[] for i in range(n)]
+lastAnswer = 0
+
+for T in range(q):
+    z, x, y = map(int, input().split())
+
+    location = ((x ^ lastAnswer) % n)
+    
+    if z == 1:
+        seqList[location].append(y)
+    else:
+        lastAnswer = seqList[location][(y % len(seqList[location]))]
+        print(lastAnswer)
